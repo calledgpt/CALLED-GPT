@@ -72,5 +72,5 @@ def generate_response(transcription):
         return response.choices[0].text.strip()
     except Exception as e:
         return f"Error in AI response generation: {str(e)}"
-if__name__=="main":
+if_name_=="main":
     app.run(debug=True)

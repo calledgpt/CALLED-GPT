@@ -72,7 +72,5 @@ def generate_response(transcription):
         return response.choices[0].text.strip()
     except Exception as e:
         return f"Error in AI response generation: {str(e)}"
-
-#this is needed for vercel
-def handler(request):
-    return app
+if__name__=="main":
+    app.run(debug=True)

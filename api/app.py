@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from twilio.twiml.voice_response import VoiceResponse
 from twilio.rest import Client
 import openai
@@ -24,9 +24,10 @@ deepgram = Deepgram(DEEPGRAM_API_KEY)
 openai.api_key = OPENAI_API_KEY
 
 app = Flask(__name__)
-@app.route("/")
-def start():
-    return "The Called GPT server is running"
+@app.route('/')
+def serve_index():
+    return send_from_directory('', 'index.html')
+
 @app.route("/incoming_call", methods=["POST"])
 def incoming_call():
     """Handles incoming Twilio calls"""
@@ -72,6 +73,5 @@ def generate_response(transcription):
         return response.choices[0].text.strip()
     except Exception as e:
         return f"Error in AI response generation: {str(e)}"
-
-if __name__== "__main__":
+if __name__== '__main__':
     app.run(debug=True)

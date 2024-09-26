@@ -24,9 +24,9 @@ deepgram = Deepgram(DEEPGRAM_API_KEY)
 openai.api_key = OPENAI_API_KEY
 
 app = Flask(__name__)
-@app.route("/")
-def start():
-    return "The Called GPT server is running"
+@app.route('/')
+def serve_index():
+    return send_from_directory('', 'index.html')
 @app.route("/incoming_call", methods=["POST"])
 def incoming_call():
     """Handles incoming Twilio calls"""
